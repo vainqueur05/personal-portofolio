@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ g.translations['nav_competences'] }} - Mon Portfolio{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+<h1 class="text-center mb-5">{{ g.translations['competences_titre'] }}</h1>
+<p class="lead text-center mb-5">{{ g.translations['competences_sous_titre'] }}</p>
+
+    {% for categorie, items in competences.items() %}
+<div class="mb-5">
+<h2 class="h3 mb-4 text-capitalize">{{ categorie }}</h2>
+<div class="row">
+            {% for item in items %}
+<div class="col-md-6 mb-4">
+<div class="card border-0 shadow-sm h-100">
+<div class="card-body">
+<div class="d-flex align-items-center mb-3">
+<i class="bi {{ item.icone }} fs-2 text-primary me-3"></i>
+<h5 class="card-title mb-0">{{ item.nom }}</h5>
+</div>
+<div class="progress" style="height: 10px;">
+<div class="progress-bar bg-primary"
+                                 role="progressbar"
+                                 style="width: {{ item.niveau }}%;"
+                                 aria-valuenow="{{ item.niveau }}"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100">
+</div>
+</div>
+<small class="text-muted mt-2 d-block">{{ item.niveau }}%</small>
+</div>
+</div>
+</div>
+            {% endfor %}
+</div>
+</div>
+    {% endfor %}
+</div>
+{% endblock %}

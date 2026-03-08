@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ g.translations['nav_a_propos'] }} - Mon Portfolio{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+<h1 class="text-center mb-5">{{ g.translations['about_titre'] }}</h1>
+
+<div class="row">
+<div class="col-md-4 text-center mb-4">
+<img src="{{ url_for('static', filename='images/avatar.jpg') }}"
+                 alt="{{ about.nom }}"
+                 class="rounded-circle img-fluid shadow mb-3"
+                 style="width: 250px; height: 250px; object-fit: cover; border: 4px solid var(--primary-color);">
+<h3>{{ about.nom }}</h3>
+<p class="lead">{{ about.titre }}</p>
+
+<div class="mt-4 text-start">
+<p><i class="bi bi-geo-alt-fill text-primary me-2"></i> {{ about.localisation }}</p>
+<p><i class="bi bi-envelope-fill text-primary me-2"></i> {{ about.email }}</p>
+<p><i class="bi bi-calendar-check-fill text-primary me-2"></i>
+                    {% if about.disponible %}
+<span class="badge bg-success">Disponible</span>
+                    {% else %}
+<span class="badge bg-secondary">Indisponible</span>
+                    {% endif %}
+</p>
+</div>
+
+<a href="{{ url_for('contact') }}" class="btn btn-primary mt-3">{{ g.translations['about_contact_btn'] }}</a>
+</div>
+
+<div class="col-md-8">
+<h2 class="mb-4">{{ g.translations['about_parcours_titre'] }}</h2>
+            {% for paragraph in about.bio %}
+<p class="lead" style="font-size: 1.1rem; line-height: 1.8;">{{ paragraph }}</p>
+            {% endfor %}
+
+<h3 class="mt-5">{{ g.translations['about_competences_cles'] }}</h3>
+<div class="row mt-3">
+<div class="col-md-6">
+<ul class="list-unstyled">
+<li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> Python / Flask</li>
+<li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> JavaScript (ES6+)</li>
+<li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> HTML5 / CSS3</li>
+</ul>
+</div>
+<div class="col-md-6">
+<ul class="list-unstyled">
+<li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> Bootstrap / Tailwind</li>
+<li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> Git / GitHub</li>
+<li class="mb-2"><i class="bi bi-check-circle-fill text-primary me-2"></i> UI / Design basique</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ project.titre }} - Mon Portfolio{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+<nav aria-label="breadcrumb">
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="{{ url_for('projects') }}">{{ g.translations['nav_projets'] }}</a></li>
+<li class="breadcrumb-item active" aria-current="page">{{ project.titre }}</li>
+</ol>
+</nav>
+
+<div class="row">
+<div class="col-lg-8">
+<h1 class="mb-3">{{ project.titre }}</h1>
+<p class="text-muted mb-4">{{ project.date }}</p>
+
+<img src="{{ url_for('static', filename='images/projects/' + project.image) }}"
+                 class="img-fluid rounded shadow-sm mb-4"
+                 alt="{{ project.titre }}"
+                 onerror="this.src='{{ url_for('static', filename='images/default.PNG') }}'">
+
+<div class="mb-4">
+<h4>{{ g.translations['project_detail_description'] }}</h4>
+<p class="lead">{{ project.description_longue }}</p>
+</div>
+
+<div class="mb-4">
+<h4>{{ g.translations['project_detail_technologies'] }}</h4>
+                {% for tech in project.technologies %}
+<span class="badge bg-primary me-1 p-2">{{ tech }}</span>
+                {% endfor %}
+</div>
+
+<div class="mb-4">
+                {% if project.lien_demo %}
+<a href="{{ project.lien_demo }}" target="_blank" class="btn btn-primary me-2">{{ g.translations['project_detail_demo'] }}</a>
+                {% endif %}
+                {% if project.lien_code %}
+<a href="{{ project.lien_code }}" target="_blank" class="btn btn-outline-secondary">{{ g.translations['project_detail_code'] }}</a>
+                {% endif %}
+</div>
+</div>
+
+<div class="col-lg-4">
+<div class="card bg-light border-0">
+<div class="card-body">
+<h5>{{ g.translations['project_detail_resume'] }}</h5>
+                    
+<p><strong>Client :</strong> {{ project.clients if project.clients else 'Personnel' }}</p>
+                    
+<p><strong>{{ g.translations['project_detail_annee'] }} :</strong> {{ project.date }}</p>
+                    
+<p><strong>Catégorie :</strong> {{ project.type if project.type else 'Web' }}</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
+

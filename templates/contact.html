@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ g.translations['nav_contact'] }} - Mon Portfolio{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+<h1 class="text-center mb-5">{{ g.translations['contact_titre'] }}</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+<div class="alert alert-{{ 'success' if category == 'success' else 'danger' }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+<div class="row justify-content-center">
+<div class="col-md-8">
+<form method="POST" action="https://formspree.io/f/xaqpnkek">
+<div class="mb-3">
+<label for="name" class="form-label">{{ g.translations['contact_nom'] }} *</label>
+<input type="text" class="form-control" id="name" name="name" required>
+</div>
+<div class="mb-3">
+<label for="email" class="form-label">{{ g.translations['contact_email'] }} *</label>
+<input type="email" class="form-control" id="email" name="email" required>
+</div>
+<div class="mb-3">
+<label for="phone" class="form-label">{{ g.translations['contact_phone'] }}</label>
+<input type="tel" class="form-control" id="phone" name="phone">
+</div>
+<div class="mb-3">
+<label for="message" class="form-label">{{ g.translations['contact_message'] }} *</label>
+<textarea class="form-control" id="message" name="message" rows="5" required>{% if service %}Bonjour, je suis intéressé par votre service "{{ service }}". Pourriez-vous me donner plus d'informations ?{% endif %}</textarea>
+</div>
+<button type="submit" class="btn btn-primary">{{ g.translations['contact_envoyer'] }}</button>
+</form>
+</div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+    smtp_server = os.getenv('SMTP_SERVER')
+    smtp_port = int(os.getenv('SMTP_PORT', 587))
+    smtp_username = os.getenv('SMTP_USERNAME')
+    smtp_password = os.getenv('SMTP_PASSWORD')
+    from_email = smtp_username
+    to_email = smtp_username  # Envoie à toi-même (ou à une autre adresse)
+
+    subject = f"Nouveau message de {name} depuis ton site"
+    msg = MIMEMultipart()
+    msg['From'] = from_email
+    msg['To'] = to_email
+    msg['Subject'] = subject
+
+    body = f"""
+    Nom: {name}
+    Email: {email}
+    Téléphone: {phone if phone else 'Non fourni'}
+
+    Message:
+    {message}
+"""
+    msg.attach(MIMEText(body, 'plain', 'utf-8'))
+
+    try:
+        with smtplib.SMTP(smtp_server, smtp_port) as server:
+            server.starttls()
+            server.login(smtp_username, smtp_password)
+            server.send_message(msg)
+        return True
+    except Exception as e:
+        print(f"Erreur envoi email: {e}")
+        return False

@@ -1,0 +1,26 @@
+[
+    {
+"id": 1,
+"titre": "Site e-commerce pour boutique de mode",
+"description_courte": "Plateforme complète avec panier, paiement et gestion des stocks.",
+"description_longue": "Développement d'une boutique en ligne avec Flask, Stripe pour les paiements, et une interface d'administration pour gérer les produits. Design responsive et optimisé pour le mobile.",
+"image": "001.jpg",
+"technologies": ["Flask", "Stripe", "Bootstrap", "SQLite"],
+"lien_demo": "https://example.com",
+"lien_code": "https://github.com/...",
+"date": "2025",
+"clients":"xxxxxxxx",
+"type":"site e-commerce"
+    },
+    {
+"id": 2,
+"titre": "Portfolio personnel version 1",
+"description_courte": "Site élégant pour présenter mes projects et autres.",
+"description_longue": "Création d'un portfolio pour mon usage individuelle. Formulaire de contact.",
+"image": "002.PNG",
+"technologies": ["Flask", "CSS/HTML", "Bootstrap"],
+"lien_demo": "https://example.com",
+"lien_code": "https://github.com/...",
+"date": "Fevrier 2026"
+    }
+]
