@@ -1,68 +1,83 @@
-<!DOCTYPE html>
-<html lang="fr">
+<!doctype html>
+<html lang="{{ g.current_lang|default('fr') }}">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{% block title %}Mon Portfolio{% endblock %}</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-icons.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Portfolio de Vainqueur Kalema, développeur Python spécialisé dans les applications web, APIs, SaaS et automatisation.">
+    <meta name="author" content="Vainqueur Kalema">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0b1020">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Vainqueur Kalema — Développeur Python">
+    <meta property="og:description" content="Applications web, APIs, SaaS et automatisation avec Python.">
+    <meta property="og:image" content="{{ url_for('static', filename='images/avatar.jpg', _external=True) }}">
+    <meta property="og:url" content="{{ request.base_url }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>{% block title %}Vainqueur Kalema — Développeur Python{% endblock %}</title>
+    <link rel="canonical" href="{{ request.base_url }}">
+    <link rel="icon" type="image/jpeg" href="{{ url_for('static', filename='images/avatar.jpg') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-icons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
-<div class="container">
-<a class="navbar-brand fw-bold" href="{{ url_for('index') }}">
-<i class="bi bi-code-square"></i> Master-Mind
-</a>
-<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-<span class="navbar-toggler-icon"></span>
-</button>
-<div class="collapse navbar-collapse" id="navbarNav">
-<ul class="navbar-nav ms-auto">
-<li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">{{ g.translations['nav_accueil'] }}</a></li>
-<li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">{{ g.translations['nav_a_propos'] }}</a></li>
-<li class="nav-item"><a class="nav-link" href="{{ url_for('competences') }}">{{ g.translations['nav_competences'] }}</a></li>
-<li class="nav-item"><a class="nav-link" href="{{ url_for('services') }}">{{ g.translations['nav_services'] }}</a></li>
-<li class="nav-item"><a class="nav-link" href="{{ url_for('projects') }}">{{ g.translations['nav_projets'] }}</a></li>
-<li class="nav-item"><a class="nav-link" href="{{ url_for('contact') }}">{{ g.translations['nav_contact'] }}</a></li>
-
-<!-- Ajout du sélecteur de langue dans la navbar (par exemple à droite) -->
-<!-- <li class="nav-item dropdown">
-<a class="nav-link dropdown-toggle" href="#" id="langDropdown" role="button" data-bs-toggle="dropdown">
-        {{ g.current_lang|upper }}
-</a>
-<ul class="dropdown-menu dropdown-menu-end">
-        {% for code, name in config['LANGUAGES'].items() %}
-<li><a class="dropdown-item {% if g.current_lang == code %}active{% endif %}" href="{{ url_for('set_language', lang=code) }}">{{ name }}</a></li>
-        {% endfor %}
-</ul>
-</li>
- -->
-
-</ul>
-</div>
-</div>
+<nav class="navbar navbar-expand-lg fixed-top site-navbar" aria-label="Navigation principale">
+    <div class="container">
+        <a class="navbar-brand" href="{{ url_for('index') }}" aria-label="Accueil Vainqueur Kalema">
+            <span class="brand-mark">VK</span>
+            <span>Vainqueur<span class="brand-dot">.</span></span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Ouvrir le menu">
+            <i class="bi bi-list fs-3"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Accueil</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">À propos</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('services') }}">Services</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('projects') }}">Projets</a></li>
+                <li class="nav-item ms-lg-2"><a class="btn btn-primary btn-sm px-3" href="{{ url_for('contact') }}">Démarrer un projet</a></li>
+            </ul>
+        </div>
+    </div>
 </nav>
 
-<main class="pt-5 mt-4">
-        {% block content %}{% endblock %}
-</main>
+<main>{% block content %}{% endblock %}</main>
 
-<footer class="bg-light text-center py-4 mt-5">
-<div class="container">
-<p class="mb-2">&copy;. {{ g.translations['footer_droits'] }}</p>
-<div class="social-links">
-<a href="https://wa.me/+243895288981" target="_blank" class="text-dark me-3"><i class="bi bi-whatsapp fs-4"></i></a>
-<a href="https://facebook.com/vainqueur.kalema.2025"target="_blank" class="text-dark me-3"><i class="bi bi-facebook fs-4"></i></a>
-<a href="https://instagram.com/tonprofil" target="_blank" class="text-dark"><i class="bi bi-instagram fs-4"></i></a>
-</div>
-</div>
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <a class="footer-brand" href="{{ url_for('index') }}">Vainqueur<span>.</span></a>
+                <p>Développeur Python. Je transforme des idées en produits numériques utiles, rapides et maintenables.</p>
+            </div>
+            <div>
+                <h2>Navigation</h2>
+                <a href="{{ url_for('about') }}">À propos</a>
+                <a href="{{ url_for('services') }}">Services</a>
+                <a href="{{ url_for('projects') }}">Projets</a>
+                <a href="{{ url_for('contact') }}">Contact</a>
+            </div>
+            <div>
+                <h2>Me retrouver</h2>
+                <a href="https://github.com/vainqueur05" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="https://wa.me/243895288981" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                <a href="mailto:vaiinqueurkalema035@gmail.com">Email</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2026 Vainqueur Kalema. Tous droits réservés.</span>
+            <span>Conçu et développé avec Python.</span>
+        </div>
+    </div>
 </footer>
 
-    {% block scripts %}
-<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ url_for('static', filename='js/script.js') }}"></script>
-    {% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+{% endblock %}
 </body>
 </html>
