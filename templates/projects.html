@@ -1,41 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ g.translations['nav_projets'] }} - Mon Portfolio{% endblock %}
+{% block title %}Projets — Vainqueur Kalema{% endblock %}
 
 {% block content %}
-<div class="container py-5">
-<h1 class="text-center mb-5">{{ g.translations['projects_titre'] }}</h1>
-<p class="lead text-center mb-5">{{ g.translations['projects_sous_titre'] }}</p>
-
-<div class="row g-4">
-        {% for project in projects %}
-<div class="col-md-6 col-lg-4">
-<div class="card h-100 border-0 shadow-sm project-card">
-<img src="{{ url_for('static', filename='images/projects/' + project.image) }}"
-                     class="card-img-top"
-                     alt="{{ project.titre }}"
-                     style="height: 200px; object-fit: cover;"
-                     onerror="this.src='{{ url_for('static', filename='images/default.PNG') }}'">
-<div class="card-body d-flex flex-column">
-<h5 class="card-title">{{ project.titre }}</h5>
-<p class="card-text text-muted">{{ project.description_courte }}</p>
-
-<div class="mb-3">
-                        {% for tech in project.technologies %}
-<span class="badge bg-secondary me-1">{{ tech }}</span>
-                        {% endfor %}
-</div>
-
-<div class="mt-auto d-flex justify-content-between align-items-center">
-<small class="text-muted">{{ project.date }}</small>
-<small class="text-muted">{{ project.clients }}</small>
-<small class="text-muted">{{ project.type }}</small>
-<a href="{{ url_for('project_detail', project_id=project.id) }}" class="btn btn-outline-primary btn-sm">{{ g.translations['projects_voir_detail'] }}</a>
-</div>
-</div>
-</div>
-</div>
-        {% endfor %}
-</div>
-</div>
+<section class="page-hero"><div class="container"><span class="section-kicker">TRAVAIL SÉLECTIONNÉ</span><h1>Des projets construits pour résoudre de vrais problèmes.</h1><p>Applications web, APIs et produits numériques développés avec une approche simple et pragmatique.</p></div></section>
+<section class="section-space"><div class="container"><div class="row g-4">
+{% for project in projects %}
+<div class="col-md-6 col-lg-4"><article class="project-card-new"><img src="{{ url_for('static', filename='images/projects/' + project.image) }}" alt="Aperçu de {{ project.titre }}" loading="lazy"><div class="project-card-body"><div class="project-meta"><span>{{ project.type }}</span><span>{{ project.date }}</span></div><h2>{{ project.titre }}</h2><p>{{ project.description_courte }}</p><div class="project-tags">{% for tech in project.technologies %}<span>{{ tech }}</span>{% endfor %}</div><a href="{{ url_for('project_detail', project_id=project.id) }}" class="text-link">Voir le projet <i class="bi bi-arrow-up-right"></i></a></div></article></div>
+{% else %}<div class="col-12"><div class="empty-state">Aucun projet à afficher pour le moment.</div></div>{% endfor %}
+</div></div></section>
 {% endblock %}
