@@ -1,3 +1,10 @@
 Flask
 python-dotenv
 gunicorn
+Flask-SQLAlchemy
+Flask-Migrate
+Flask-WTF
+Flask-Limiter
+argon2-cffi
+psycopg[binary]
+email-validator
