@@ -1,15 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Environment / secrets
 .env
 .env.*
 !.env.example
-__pycache__/
-*.py[cod]
-.venv/
-venv/
-*.sqlite3
+
+# Local databases
 *.db
-instance/
+*.sqlite
+*.sqlite3
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
 .pytest_cache/
 .coverage
 htmlcov/
-.vscode/
-.idea/
+
+# Logs
+*.log
+logs/
